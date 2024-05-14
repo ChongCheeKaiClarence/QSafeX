@@ -17,10 +17,11 @@ from roboflow import Roboflow
 def main():
 
 
-    model = YOLO('weights/humanv12.pt')
-    results = model("input_media/video_2024-03-19_16-01-58.mp4", save=True)
+    # model = YOLO('weights/humanv12.pt')
+    # results = model("input_media/video_2024-03-19_16-01-58.mp4", save=True)
     #
-    # userSelectionHandler.userSelectionHandler()
+    print("main.py: main() called")
+    userSelectionHandler.userSelectionHandler()
 
     #signalTelegram.sendMessage()
     # switcher ={

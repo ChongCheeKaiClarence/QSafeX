@@ -26,14 +26,14 @@ def load_model(mode):
 def userSelectionHandler():
 
 
-
-    source = input("What is the rtsp link? format is rtsp://admin:admin@IP:Port/h264.sdp")
+    print("userSelectionHandler.py: userSelectionHandler() called")
+    source = input("What is the rtsp link? format is rtsp://admin:admin@IP:Port/h264.sdp: ")
 
     # source = input("What is the file path of your media?")
     if source=='test':
-        source = "test.mp4"
+        source = "train_videos/video1.mp4"
     elif source=='rtsptest':
-        source = 'rtsp://admin:admin@192.168.68.56:6968/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
+        source = 'rtsp://admin:admin@10.161.77.247:8080/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
     vcap = cv2.VideoCapture(source)
     ret, image = vcap.read()
     points_of_interest = calibrateregions.define_rect_all(image, 3)
@@ -46,24 +46,24 @@ def userSelectionHandler():
     detection_thread2 = threading.Thread(target=unauthorized_access.UnauthorizedAccess, args=(source,points_of_interest[2],))
     detection_thread3 = threading.Thread(target=ppe.ppe, args=(source, points_of_interest[1],))
 
-    # Start the detection threads
+    # # Start the detection threads
     detection_thread1.start()
     detection_thread2.start()
     detection_thread3.start()
 
 
-    # Wait for the detection threads to finish
+    # # Wait for the detection threads to finish
     detection_thread1.join()
     detection_thread2.join()
     detection_thread3.join()
 
     ## call the model
-    # if(mode == 1):
-    #     return unauthorized_access.UnauthorizedAccess(source)
-    # elif mode == 2:
-    #     return counting.counting(source)
-    # elif mode==3:
-    #     return ppe.ppe(source)
-    # elif mode == 4:
-    #     return speedestimation.speedestimation(source)
+    if(mode == 1):
+        return unauthorized_access.UnauthorizedAccess(source)
+    elif mode == 2:
+        return counting.counting(source)
+    elif mode==3:
+        return ppe.ppe(source)
+    elif mode == 4:
+        return speedestimation.speedestimation(source)
 
