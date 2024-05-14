@@ -6,21 +6,21 @@ import threading
 from ultralytics import YOLO
 import cv2
 import calibrateregions
-def rtsp_required(mode):
-    if(mode==1):
-        return True
-    else:
-        return False
+# def rtsp_required(mode):
+#     if(mode==1):
+#         return True
+#     else:
+#         return False
 
-def load_model(mode):
-    if(mode == 1):
-        return "weights/best(2feb).pt"
-    elif mode == 2:
-        return "weights/barrel.pt"
-    elif mode==3:
-        return "ppe.pt"
-    elif mode == 4:
-        return "best.pt" ##tobeupdated
+# def load_model(mode):
+#     if(mode == 1):
+#         return "weights/best(2feb).pt"
+#     elif mode == 2:
+#         return "weights/barrel.pt"
+#     elif mode==3:
+#         return "ppe.pt"
+#     elif mode == 4:
+#         return "best.pt" ##tobeupdated
 
 
 def userSelectionHandler():
@@ -31,9 +31,9 @@ def userSelectionHandler():
 
     # source = input("What is the file path of your media?")
     if source=='test':
-        source = "train_videos/video1.mp4"
+        source = "train_videos/video2.mp4"
     elif source=='rtsptest':
-        source = 'rtsp://admin:admin@10.161.77.247:8080/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
+        source = 'rtsp://admin:admin@192.168.50.135:8080/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
     vcap = cv2.VideoCapture(source)
     ret, image = vcap.read()
     points_of_interest = calibrateregions.define_rect_all(image, 3)
@@ -57,13 +57,13 @@ def userSelectionHandler():
     detection_thread2.join()
     detection_thread3.join()
 
-    ## call the model
-    if(mode == 1):
-        return unauthorized_access.UnauthorizedAccess(source)
-    elif mode == 2:
-        return counting.counting(source)
-    elif mode==3:
-        return ppe.ppe(source)
-    elif mode == 4:
-        return speedestimation.speedestimation(source)
+    # ## call the model
+    # if(mode == 1):
+    #     return unauthorized_access.UnauthorizedAccess(source)
+    # elif mode == 2:
+    #     return counting.counting(source)
+    # elif mode==3:
+    #     return ppe.ppe(source)
+    # elif mode == 4:
+    #     return speedestimation.speedestimation(source)
 
