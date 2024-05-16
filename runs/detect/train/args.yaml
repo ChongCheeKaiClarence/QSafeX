@@ -1,10 +1,10 @@
 task: detect
 mode: train
-model: yolov8m.pt
-data: Oil-Barrel-Oil-Drum--1/data.yaml
-epochs: 200
+model: weights/yolov8s-worldv2.pt
+data: datasets/lvis.yaml
+epochs: 100
 time: null
-patience: 50
+patience: 100
 batch: 16
 imgsz: 640
 save: true
@@ -94,6 +94,7 @@ shear: 0.0
 perspective: 0.0
 flipud: 0.0
 fliplr: 0.5
+bgr: 0.0
 mosaic: 1.0
 mixup: 0.0
 copy_paste: 0.0

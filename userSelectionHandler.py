@@ -31,7 +31,7 @@ def userSelectionHandler():
 
     # source = input("What is the file path of your media?")
     if source=='test':
-        source = "train_videos/video2.mp4"
+        source = "test/barrel.jpg"
     elif source=='rtsptest':
         source = 'rtsp://admin:admin@192.168.50.135:8080/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
     vcap = cv2.VideoCapture(source)
@@ -48,14 +48,14 @@ def userSelectionHandler():
 
     # # Start the detection threads
     detection_thread1.start()
-    detection_thread2.start()
-    detection_thread3.start()
+    # detection_thread2.start()
+    # detection_thread3.start()
 
 
     # # Wait for the detection threads to finish
     detection_thread1.join()
-    detection_thread2.join()
-    detection_thread3.join()
+    # detection_thread2.join()
+    # detection_thread3.join()
 
     # ## call the model
     # if(mode == 1):
