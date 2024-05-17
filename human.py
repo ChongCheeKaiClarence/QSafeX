@@ -8,10 +8,10 @@ from ultralytics import YOLO
 import cv2
 
 # Load a model
-model = YOLO('weights\ppe(16May_3).pt')  # pretrained YOLOv8n model
+model = YOLO('weights\ppe.pt')  # pretrained YOLOv8n model
 
 # Run batched inference on a list of images
-results = model('input_media/humanDistance1.jpg', stream=True, show=True)  # return a generator of Results objects
+results = model('cropped_images\cropped_0_3.jpg', stream=True, show=True)  # return a generator of Results objects
 
 # Process results generator
 for result in results:
@@ -21,4 +21,4 @@ for result in results:
     probs = result.probs  # Probs object for classification outputs
     obb = result.obb  # Oriented boxes object for OBB outputs
     result.show()  # display to screen
-    result.save(filename='output_media/humanDistance1.jpg')  # save to disk
+    result.save(filename='output_media/cropped_0_3_test.jpg')  # save to disk
