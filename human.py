@@ -7,11 +7,15 @@ import calibrateregions
 from ultralytics import YOLO
 import cv2
 
-# Load a model
-model = YOLO('weights\ppe.pt')  # pretrained YOLOv8n model
+from ultralytics import YOLO
 
-# Run batched inference on a list of images
-results = model('cropped_images\cropped_0_3.jpg', stream=True, show=True)  # return a generator of Results objects
+# Load a model
+model = YOLO("yolov8x-oiv7.pt")  # load an official model
+# model("input_media/black_screen.png")
+# model = YOLO("weights\mnist_cls.pt")  # load a custom model
+
+# Predict with the model
+results = model("input_media\ppetest.png", imgsz=640)  # predict on an image
 
 # Process results generator
 for result in results:
@@ -21,4 +25,4 @@ for result in results:
     probs = result.probs  # Probs object for classification outputs
     obb = result.obb  # Oriented boxes object for OBB outputs
     result.show()  # display to screen
-    result.save(filename='output_media/cropped_0_3_test.jpg')  # save to disk
+    # result.save(filename='output_media/cropped_0_3_test.jpg')  # save to disk
