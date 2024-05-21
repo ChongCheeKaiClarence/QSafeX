@@ -20,3 +20,10 @@ download_from_url(
     "https://raw.githubusercontent.com/obss/sahi/main/demo/demo_data/terrain2.png",
     "demo_data/terrain2.png",
 )
+
+detection_model = AutoDetectionModel.from_pretrained(
+    model_type="yolov8",
+    model_path=yolov8_model_path,
+    confidence_threshold=0.3,
+    device="cpu",  # or 'cuda:0'
+)
