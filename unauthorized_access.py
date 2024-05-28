@@ -12,7 +12,7 @@ def UnauthorizedAccess(source,region_of_interest):
     #
     #
 
-    model = YOLO("weights/best(2feb).pt")
+    model = YOLO("yolov8x-oiv7.pt")
     results = model(source=source, show=True, stream=True)
     breach_inAccess = False
     for result in results:
