@@ -15,7 +15,7 @@ model = YOLO("weights\ppe_roboflow_23May.pt")  # load an official model
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model("input_media/humanDistance4.jpg", imgsz=1280, classes=[3, 13])  # predict on an image
+results = model("input_media/humanDistance1.jpg", imgsz=1280, classes=[3, 13])  # predict on an image
 
 # Process results generator
 for result in results:
