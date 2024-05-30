@@ -14,19 +14,19 @@ model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")  # load an
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model("input_media\humanDistance1.jpg", imgsz=1280, show=True, classes=[0, 5, 7 ])  # predict on an image
+results = model("input_media\humanDistance2.jpg", imgsz=640, show=True, classes=[0],)  # predict on an image
 
 for result in results:
     result.show()
 
 
 # # Load a model
-# model = YOLOv10("weights\yolov10-ppe-roboflow-28May.pt")  # load an official model
-# # model("input_media/black_screen.png")
+# model = YOLOv10("weights\yolov10_28May_2.pt")  # load an official model
+# # model("input_media/black_screen.png")s
 # # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
-# # Predict with the model
-# results = model("input_media\humanDistance1.jpg", imgsz=640)  # predict on an image
+# # Predict with the mode
+# results = model("input_media\humanDistance1.jpg", imgsz=1280)  # predict on an image
 
 # for result in results:
 #     result.show()
