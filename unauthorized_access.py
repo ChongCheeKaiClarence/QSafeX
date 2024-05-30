@@ -12,8 +12,8 @@ def UnauthorizedAccess(source,region_of_interest):
     #
     #
 
-    model = YOLO("yolov8x-oiv7.pt")
-    results = model(source=source, show=True, stream=True)
+    model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")
+    results = model(source=source, show=True, stream=True, imgsz=2560, classes=[5], conf=0.4)
     breach_inAccess = False
     for result in results:
         boxes = result.boxes

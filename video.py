@@ -3,7 +3,7 @@ import torch
 from ultralytics import YOLO
 
 # Load a model
-model = YOLO("weights\ppe_roboflow_23May.pt")  # load your model
+model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")  # load your model
 
 # Open the video file
 source = "test\human_video.mp4"
@@ -16,7 +16,7 @@ while ret:
     ret, image = vcap.read()
 
     # Predict with the model
-    results = model(image, imgsz=640, show=True)  # predict on an image
+    results = model(image, imgsz=2560, show=True, classes=[5], conf=0.4)  # predict on an image
 
 
 # Release the video capture and writer objects

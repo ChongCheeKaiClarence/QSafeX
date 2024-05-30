@@ -8,37 +8,12 @@ from ultralytics import YOLO
 import cv2
 
 # Load a model
-model = YOLO('weights/Goodweights/humans/humanv11.pt')  # pretrained YOLOv8n model
+model = YOLO("weights\safety_shoe_30May.pt")  # load an official model
+# model("input_media/black_screen.png")
+# model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
-# Open the video file
-cap = cv2.VideoCapture('test\human_video.mp4')
+# Predict with the model
+results = model("cropped_images\crop_0_1.jpg", imgsz=640, show=True, classes=[1])  # predict on an image
 
-# Create a directory to store the cropped images
-if not os.path.exists('cropped_images'):
-    os.makedirs('cropped_images')
-
-# Process video frames
-frame_count = 0
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
-
-    # Only process every 30th frame (1 frame per second)
-    if frame_count % 30 == 0:
-        # Run inference on the current frame
-        results = model(frame, stream=True, show=True)
-
-        # Process results generator
-        for i, result in enumerate(results):
-            boxes = result.boxes  # Boxes object for bounding box outputs
-            for j, box in enumerate(boxes):
-                box_coords = box.xyxy.int().squeeze().tolist()
-                x1, y1, x2, y2 = box_coords
-                cropped_img = frame[y1:y2, x1:x2]
-                cv2.imwrite(f'cropped_images/cropped_{frame_count}_{j}.jpg', cropped_img)
-
-    frame_count += 1
-
-# Release the video capture
-cap.release()
+for result in results:
+    result.show()
