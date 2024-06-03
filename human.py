@@ -18,9 +18,13 @@ model = YOLO(weight)  # load an official model
 
 # Predict with the model
 
-results = model("input_media\humanDistance2.jpg", imgsz=640, show=True, classes=[0],)  # predict on an image
-)
+results = model("input_media\humanDistance2.jpg", imgsz=960, show=True, classes=[5])  # predict on an image
 
+for result in results:
+    result.show()
+    for box in result.boxes:
+        conf = box.conf  # confidence score
+        print(f"Confidence: {conf.item()}")  # Print the confidence score9420a29c46d2d438f08cc36f634caf717e6253b6
 
 # # Load a model
 # model = YOLOv10("weights\yolov10_28May_2.pt")  # load an official model
