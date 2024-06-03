@@ -14,11 +14,13 @@ model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")  # load an
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model("input_media\humanDistance2.jpg", imgsz=640, show=True, classes=[0],)  # predict on an image
+results = model("input_media\humanDistance2.jpg", imgsz=960, show=True, classes=[5])  # predict on an image
 
 for result in results:
     result.show()
-
+    for box in result.boxes:
+        conf = box.conf  # confidence score
+        print(f"Confidence: {conf.item()}")  # Print the confidence score
 
 # # Load a model
 # model = YOLOv10("weights\yolov10_28May_2.pt")  # load an official model

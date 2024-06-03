@@ -7,38 +7,37 @@ import calibrateregions
 from ultralytics import YOLO
 import cv2
 
-# Load a model
-model = YOLO('weights/Goodweights/humans/humanv11.pt')  # pretrained YOLOv8n model
+weights = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
+source = "input_media\humanDistance2.jpg"
 
-# Open the video file
-cap = cv2.VideoCapture('test\human_video.mp4')
+# Load the YOLO model
+model = YOLO(weights)
 
-# Create a directory to store the cropped images
-if not os.path.exists('cropped_images'):
-    os.makedirs('cropped_images')
+# Predict with the model
+results = model(source, imgsz=960, show=True, classes=[5])  # predict on an image
 
-# Process video frames
-frame_count = 0
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        break
+# Load the original image using OpenCV
+original_image = cv2.imread(source)
 
-    # Only process every 30th frame (1 frame per second)
-    if frame_count % 30 == 0:
-        # Run inference on the current frame
-        results = model(frame, stream=True, show=True)
+# Create a directory to save cropped images if it doesn't exist
+cropped_dir = "cropped_images"
+os.makedirs(cropped_dir, exist_ok=True)
 
-        # Process results generator
-        for i, result in enumerate(results):
-            boxes = result.boxes  # Boxes object for bounding box outputs
-            for j, box in enumerate(boxes):
-                box_coords = box.xyxy.int().squeeze().tolist()
-                x1, y1, x2, y2 = box_coords
-                cropped_img = frame[y1:y2, x1:x2]
-                cv2.imwrite(f'cropped_images/cropped_{frame_count}_{j}.jpg', cropped_img)
+# Process each result
+for i, result in enumerate(results):
+    # Iterate through each detected object in the result
+    for j, (bbox, cls) in enumerate(zip(result.boxes.xyxy, result.boxes.cls)):
+        # Extract bounding box coordinates
+        x1, y1, x2, y2 = map(int, bbox)  # Convert to integers
+        cropped_image = original_image[y1:y2, x1:x2]  # Crop the image
 
-    frame_count += 1
+        # Save the cropped image
+        crop_filename = f"{cropped_dir}/crop_{i}_{j}.jpg"
+        cv2.imwrite(crop_filename, cropped_image)
 
-# Release the video capture
-cap.release()
+        # # Optionally, display the cropped image using OpenCV
+        # cv2.imshow(f"Cropped Image {i}_{j}", cropped_image)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
+print("Cropping complete.")
