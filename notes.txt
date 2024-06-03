@@ -1,3 +1,4 @@
 safety_shoe_31May.pt -> https://universe.roboflow.com/ppe-detection-ik50q/alert-for-safety-violation-xzjtj
 weights/safety_shoe_3Jun_2.pt -> https://universe.roboflow.com/huiyao-hu-sj18e/construction-ppe-detection/dataset/1
 weights/shoe_cls_3Jun.pt -> https://universe.roboflow.com/newstep30/shoe-classication-kaggle
+weights\safety_shoe_3Jun_3.pt -> https://universe.roboflow.com/ppe-detection-ik50q/alert-for-safety-violation-xzjtj/dataset/9#

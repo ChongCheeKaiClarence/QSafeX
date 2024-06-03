@@ -7,11 +7,11 @@ import calibrateregions
 from ultralytics import YOLO
 import cv2
 
-weights = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
-source = "input_media\humanDistance2.jpg"
+weights_person = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
+source = "input_media\humanDistance1.jpg"
 
 # Load the YOLO model
-model = YOLO(weights)
+model = YOLO(weights_person)
 
 # Predict with the model
 results = model(source, imgsz=960, show=True, classes=[5])  # predict on an image
@@ -34,6 +34,8 @@ for i, result in enumerate(results):
         # Save the cropped image
         crop_filename = f"{cropped_dir}/crop_{i}_{j}.jpg"
         cv2.imwrite(crop_filename, cropped_image)
+        
+        
 
         # # Optionally, display the cropped image using OpenCV
         # cv2.imshow(f"Cropped Image {i}_{j}", cropped_image)
