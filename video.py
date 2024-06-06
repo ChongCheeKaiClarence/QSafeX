@@ -6,7 +6,7 @@ from ultralytics import YOLO
 model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")  # load your model
 
 # Open the video file or stream
-source = "test\human_video.mp4"
+source = "input_media\Hanger1video.mp4"
 vcap = cv2.VideoCapture(source)
 
 # Check if the video capture opened successfully
@@ -24,7 +24,7 @@ while True:
         break
 
     # Predict with the model
-    results = model(frame, imgsz=960, stream=True, classes=[5])
+    results = model(frame, imgsz=2560, stream=True, classes=[5])
 
     # Loop through the results and draw bounding boxes
     for result in results:
