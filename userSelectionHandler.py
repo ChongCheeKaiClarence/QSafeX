@@ -31,7 +31,7 @@ def userSelectionHandler():
 
     # source = input("What is the file path of your media?")
     if source=='test':
-        source = "test\human_video.mp4"
+        source = "input_media\Hoistlift18.mp4"
     elif source=='rtsptest':
         source = 'rtsp://admin:admin@192.168.50.135:8080/h264.sdp' ##developer testing rtsp://admin:admin@10.10.9.177:6968/h264.sdp
     vcap = cv2.VideoCapture(source)
@@ -42,20 +42,20 @@ def userSelectionHandler():
     print(points_of_interest)
 
     
-    detection_thread1 = threading.Thread(target=counting.counting, args=(source, points_of_interest[0],))
-    detection_thread2 = threading.Thread(target=unauthorized_access.UnauthorizedAccess, args=(source,points_of_interest[2],))
+    # detection_thread1 = threading.Thread(target=counting.counting, args=(source, points_of_interest[0],))
+    # detection_thread2 = threading.Thread(target=unauthorized_access.UnauthorizedAccess, args=(source,points_of_interest[2],))
     detection_thread3 = threading.Thread(target=ppe.ppe, args=(source, points_of_interest[1],))
 
     # # Start the detection threads
     # detection_thread1.start()
-    detection_thread2.start()
-    # detection_thread3.start()
+    # detection_thread2.start()
+    detection_thread3.start()
 
 
     # # Wait for the detection threads to finish
     # detection_thread1.join()
-    detection_thread2.join()
-    # detection_thread3.join()
+    # detection_thread2.join()
+    detection_thread3.join()
 
     # ## call the model
     # if(mode == 1):

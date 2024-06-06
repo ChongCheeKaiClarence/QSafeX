@@ -14,9 +14,9 @@ def ppe(source,region_of_interest):
     #
     #
 
-    model = YOLO("weights/ppe.pt")
+    model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")
 
-    results = model(source=source, stream=True, classes=[2,3,4])
+    results = model(source=source, stream=True, show=True, imgsz=3200, classes=[0, 5, 7])
     num_ppe_class = 2
     last_saved_time = time.perf_counter()
     for result in results:

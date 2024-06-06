@@ -8,7 +8,7 @@ from ultralytics import YOLO
 import cv2
 
 weights_person = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
-source = "input_media\hoistImage.jpg"
+source = "input_media\People5.jpg"
 weights_boots = "weights\safety_shoe_3Jun_3.pt"
 
 # Load the YOLO model
