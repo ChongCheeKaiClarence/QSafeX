@@ -8,6 +8,7 @@ from ultralytics import YOLO
 import cv2
 
 weights_person = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
+weights_shoes = "weights\safety_shoe_3Jun_3.pt"
 source = "input_media\humanDistance1.jpg"
 
 # Load the YOLO model
@@ -35,7 +36,8 @@ for i, result in enumerate(results):
         crop_filename = f"{cropped_dir}/crop_{i}_{j}.jpg"
         cv2.imwrite(crop_filename, cropped_image)
         
-        
+        model2 = YOLO(weights_shoes)
+        model3 = YOLO(weights_person)
 
         # # Optionally, display the cropped image using OpenCV
         # cv2.imshow(f"Cropped Image {i}_{j}", cropped_image)
