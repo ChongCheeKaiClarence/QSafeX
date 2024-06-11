@@ -1,44 +1,41 @@
 import cv2
-import torch
 from ultralytics import YOLO
 
-# Load a model
-model = YOLO("weights/snehilsanyal-constructionn-site-safety-ppe.pt")  # load your model
+# Load the YOLOv8 model
+model = YOLO("weights\Goodweights\humans\humanv11.pt")
 
-# Open the video file or stream
-source = "input_media/Hoistlift18.mp4"
+# Open the video file
+video_path = "input_media\People12.mp4"
+cap = cv2.VideoCapture(video_path)
 
-# Initialize video capture
-cap = cv2.VideoCapture(source)
+display_width = 800
+display_height = 600
 
-# Get video properties
-frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-fps = int(cap.get(cv2.CAP_PROP_FPS))
+# Loop through the video frames
+while cap.isOpened():
+    # Read a frame from the video
+    success, frame = cap.read()
 
-# Define the codec and create VideoWriter object
-out = cv2.VideoWriter('output_media/Hoistlift18_output.mp4', cv2.VideoWriter_fourcc(*'mp4v'), fps, (frame_width, frame_height))
+    if success:
+        # Run YOLOv8 tracking on the frame, persisting tracks between frames
+        results = model.track(frame, persist=True, imgsz=1280, classes=[0, 5, 7])
 
-# Process the video
-for results in model(source, stream=True, classes=[0, 5, 7], imgsz=3200):
-    for result in results:
-        # Get the original frame
-        frame = result.orig_img
+        # Visualize the results on the frame
+        annotated_frame = results[0].plot()
 
-        # Draw bounding boxes on the frame
-        frame_with_boxes = result.plot()
+        # Resize the annotated frame to fit the display window
+        resized_frame = cv2.resize(annotated_frame, (display_width, display_height))
 
-        # Write the frame with bounding boxes to the output video
-        out.write(frame_with_boxes)
+        # Display the resized frame
+        cv2.imshow("YOLOv8 Tracking", resized_frame)
 
-        # Display the resulting frame
-        cv2.imshow('Frame', frame_with_boxes)
-
-        # Press Q on keyboard to exit the video early
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # Break the loop if 'q' is pressed
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             break
+    else:
+        # Break the loop if the end of the video is reached
+        break
 
-# Release everything if job is finished
+# Release the video capture object and close the display window
 cap.release()
-out.release()
 cv2.destroyAllWindows()

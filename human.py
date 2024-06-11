@@ -8,8 +8,8 @@ from ultralytics import YOLO
 from ultralytics import YOLOv10
 import cv2
 
-weight = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
-source = "input_media\People5.jpg"
+weight = 'weights\Goodweights\humans\humanv11.pt'
+source = 'input_media\Hoistlift10.jpg'
 
 # Load a model
 model = YOLO(weight)  # load an official model
@@ -18,7 +18,7 @@ model = YOLO(weight)  # load an official model
 
 # Predict with the model
 
-results = model(source, imgsz=2560, classes=[5])  # predict on an image
+results = model(source, imgsz=1280)  # predict on an image
 
 # using weights/snehilsanyal-constructionn-site-safety-ppe.pt,, classes=[0, 5, 7], hardhat person vest
 
