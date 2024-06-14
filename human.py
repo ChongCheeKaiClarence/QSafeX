@@ -8,8 +8,8 @@ from ultralytics import YOLO
 from ultralytics import YOLOv10
 import cv2
 
-weight = 'weights\Goodweights\humans\humanv11.pt'
-source = 'input_media\Hoistlift10.jpg'
+weight = 'weights/braniv4_100epoch.pt'
+source = "input_media\humanDistance2.jpg"
 
 # Load a model
 model = YOLO(weight)  # load an official model
@@ -18,15 +18,18 @@ model = YOLO(weight)  # load an official model
 
 # Predict with the model
 
-results = model(source, imgsz=1280)  # predict on an image
+results = model(source, imgsz=2560, conf=0.52)  # predict on an image
 
 # using weights/snehilsanyal-constructionn-site-safety-ppe.pt,, classes=[0, 5, 7], hardhat person vest
 
+# Iterate through results and print class names and confidence scores
 for result in results:
-    result.show()
+    result.show()  # Display the results if needed
     for box in result.boxes:
-        conf = box.conf  # confidence score
-        print(f"Confidence: {conf.item()}")  # Print the confidence score9420a29c46d2d438f08cc36f634caf717e6253b6
+        class_idx = box.cls  # Get the class index
+        conf = box.conf  # Get the confidence score
+        class_name = model.names[int(class_idx)]  # Map class index to class name
+        print(f"Class: {class_name}, Confidence: {conf.item()}")
 
 # # Load a model
 # model = YOLOv10("weights\yolov10_28May_2.pt")  # load an official model
