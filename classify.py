@@ -55,7 +55,7 @@ from ultralytics import YOLO
 
 from PIL import Image
 
-image_path = "input_media/barefoot.jpg"
+image_path = "cropped_images\crop_0_2.jpg"
 
 # Open the image
 img = Image.open(image_path)
@@ -64,13 +64,13 @@ img = Image.open(image_path)
 width, height = img.size
 
 # Calculate the crop box
-crop_box = (0, int(height * 0.7), width, height)
+crop_box = (0, int(height * 0.8), width, height)
 
 # Crop the image
 cropped_img = img.crop(crop_box)
 
 # Load a model
-model = YOLO("weights\shoe_cls_3Jun.pt")  # load a custom model
+model = YOLO("weights/footwear_cls_18June.pt")  # load a custom model
 
 # Predict with the model
 results = model(cropped_img, imgsz=128)  # predict on an image
