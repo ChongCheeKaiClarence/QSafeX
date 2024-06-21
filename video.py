@@ -2,10 +2,10 @@ import cv2
 from ultralytics import YOLO
 
 # Load the YOLOv8 model
-model = YOLO("weights\Goodweights\humans\humanv11.pt")
+model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")
 
 # Open the video file
-video_path = "input_media\People12.mp4"
+video_path = "input_media\Hoistlift32.mp4"
 cap = cv2.VideoCapture(video_path)
 
 display_width = 800
@@ -34,6 +34,7 @@ while cap.isOpened():
             break
     else:
         # Break the loop if the end of the video is reached
+        print("Failed to read frame")
         break
 
 # Release the video capture object and close the display window

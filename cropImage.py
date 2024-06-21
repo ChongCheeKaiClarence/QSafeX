@@ -8,7 +8,7 @@ from ultralytics import YOLO
 import cv2
 
 weights_person = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
-source = "input_media\HoistLift15.jpg"
+source = "input_media/roadcrossing.jpg"
 weights_boots = "weights\safety_shoe_3Jun_3.pt"
 
 # Load the YOLO model
@@ -30,7 +30,7 @@ for i, result in enumerate(results):
     for j, (bbox, cls) in enumerate(zip(result.boxes.xyxy, result.boxes.cls)):
         # Extract bounding box coordinates
         x1, y1, x2, y2 = map(int, bbox)  # Convert to integers
-        cropped_image = original_image[y1:y2, x1:x2]  # Crop the image
+        cropped_image = original_image[y1 + int((y2 - y1) * 0):y2, x1:x2]  # Crop the image
 
         # Save the cropped image
         crop_filename = f"{cropped_dir}/crop_{i}_{j}.jpg"
