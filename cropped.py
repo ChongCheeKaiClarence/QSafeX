@@ -8,8 +8,8 @@ from ultralytics import YOLO
 from ultralytics import YOLOv10
 import cv2
 
-weights = "weights\safety_shoe_3Jun_3.pt"
-source = "cropped_images\crop_0_2.jpg"
+weights = "weights/footwear_cls_18June.pt"
+source = "cropped_images\crop_0_1.jpg"
 
 # Load a model
 model = YOLO(weights)  # load an official model
@@ -17,7 +17,7 @@ model = YOLO(weights)  # load an official model
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model(source, imgsz=320, show=True)  # predict on an image
+results = model(source, imgsz=128, show=True)  # predict on an image
 
 for result in results:
     result.show()

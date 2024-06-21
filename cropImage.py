@@ -8,14 +8,14 @@ from ultralytics import YOLO
 import cv2
 
 weights_person = "weights\snehilsanyal-constructionn-site-safety-ppe.pt"
-source = "input_media\humanDistance2.jpg"
+source = "input_media\HoistLift15.jpg"
 weights_boots = "weights\safety_shoe_3Jun_3.pt"
 
 # Load the YOLO model
 model = YOLO(weights_person)
 
 # Predict with the model
-results = model(source, imgsz=1280, show=True, classes=[5])  # predict on an image
+results = model(source, imgsz=960, show=True, classes=[5])  # predict on an image
 
 # Load the original image using OpenCV
 original_image = cv2.imread(source)
