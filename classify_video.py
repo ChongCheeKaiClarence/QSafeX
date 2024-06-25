@@ -1,13 +1,14 @@
 from ultralytics import YOLO
 import cv2
 import os
+import time 
 
 # Load your models
 detector = YOLO('weights/braniv4_100epoch.pt')
 classifier = YOLO('weights/footwear_cls_18June_2.pt')
 
 # Open the video file
-video_path = 'input_media\Hoistlift6.mp4'
+video_path = 'input_media\HoistLift21.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -23,6 +24,7 @@ if not os.path.exists(output_dir):
 output_video_path = os.path.join(output_dir, 'annotated_video.avi')
 out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'XVID'), fps, (frame_width, frame_height))
 
+start_time = time.time()  # Capture the start time
 # Process each frame
 while True:
     ret, frame = cap.read()
@@ -59,5 +61,7 @@ while True:
 cap.release()
 out.release()
 cv2.destroyAllWindows()
+end_time = time.time()  # Capture the end time
 
 print(f"Processing complete. Annotated video saved at {output_video_path}")
+print(end_time - start_time)  # Print the total time taken for processing

@@ -4,8 +4,8 @@ from PIL import Image
 from transformers import AutoProcessor, AutoModelForCausalLM 
 
 
-model = AutoModelForCausalLM.from_pretrained("microsoft/Florence-2-base-ft", trust_remote_code=True)
-processor = AutoProcessor.from_pretrained("microsoft/Florence-2-base-ft", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained("microsoft/Florence-2-large-ft", trust_remote_code=True)
+processor = AutoProcessor.from_pretrained("microsoft/Florence-2-large-ft", trust_remote_code=True)
 
 url = "cropped_images\crop_0_0.jpg"
 image = Image.open(requests.get(url, stream=True).raw)

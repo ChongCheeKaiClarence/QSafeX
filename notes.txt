@@ -6,3 +6,13 @@ weights\shoe_seg_10June.pt -> https://universe.roboflow.com/minor-project-i54la/
 weights/ -> https://github.com/ongaunjie1/YOLOv8-streamlit-app/blob/master/notebooks/PPE_Detection.ipynb
 
 hoistImage -> too far for ppe detection, only the orange vest can detect (reference for distance)
+
+
+Speed test on desktop
+output_media\Hoistlift32_cls_160.avi -> 630.8101532459259
+output_media\Hoistlift32_640.avi -> 1767.843311548233
+output_media\Hoistlift32_320.avi -> 1094.0821306705475
+output_media\Hoistlift32_160.avi -> 919.3269641399384
+output_media\Hoistligt21_cls_160.avi -> 312.13123083114624
+output_media\Hoistlift21_320.avi -> 480.18553614616394
+output_media\Hoistlift21_640.avi -> 734.7356832027435
