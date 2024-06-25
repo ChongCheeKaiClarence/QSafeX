@@ -2,10 +2,10 @@ import cv2
 from ultralytics import YOLO
 
 # Load the YOLOv8 model
-model = YOLO("weights\snehilsanyal-constructionn-site-safety-ppe.pt")
+model = YOLO("weights\safety_shoe_3Jun_3.pt")
 
 # Open the video file
-video_path = "input_media\Hoistlift32.mp4"
+video_path = "input_media\Hoistlift6.mp4"
 cap = cv2.VideoCapture(video_path)
 
 display_width = 800

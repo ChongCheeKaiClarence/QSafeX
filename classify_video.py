@@ -4,10 +4,10 @@ import os
 
 # Load your models
 detector = YOLO('weights/braniv4_100epoch.pt')
-classifier = YOLO('weights/footwear_cls_18June.pt')
+classifier = YOLO('weights/footwear_cls_18June_2.pt')
 
 # Open the video file
-video_path = 'input_media/video_2024-06-21_13-49-35.mp4'
+video_path = 'input_media\Hoistlift6.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -36,7 +36,7 @@ while True:
     for result in detection_results:
         for bbox in result.boxes.xyxy:
             x1, y1, x2, y2 = map(int, bbox)
-            roi = frame[y1 + int((y2 - y1) * 0.7):y2, x1:x2]
+            roi = frame[y1 + int((y2 - y1) * 0.75):y2, x1:x2]
 
             # Run classification on the RoI (or on the entire image)
             classification_results = classifier(roi, imgsz=128)

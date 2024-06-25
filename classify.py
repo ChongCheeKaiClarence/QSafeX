@@ -53,7 +53,7 @@ from ultralytics import YOLO
 
 from PIL import Image
 
-image_path = "input_media/test3.jpg"
+image_path = "cropped_images\crop_0_1.jpg"
 
 # Open the image
 img = Image.open(image_path)
@@ -68,10 +68,15 @@ crop_box = (0, int(height * 0.8), width, height)
 cropped_img = img.crop(crop_box)
 
 # Load a model
-model = YOLO("weights/footwear_cls_18June.pt")  # load a custom model
+model1 = YOLO("weights\shoe_cls_3Jun.pt")
+model2 = YOLO('weights/footwear_cls_18June_2.pt')  # load a custom model
 
 # Predict with the model
-results = model(cropped_img, imgsz=128)  # predict on an image
+results1 = model1(cropped_img, imgsz=128)  # predict on an image
+results2 = model2(cropped_img, imgsz=128)  # predict on an image
 
-for result in results:
+for result in results1:
+    result.show()
+
+for result in results2:
     result.show()

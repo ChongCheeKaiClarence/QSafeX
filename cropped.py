@@ -5,11 +5,10 @@ import threading
 import torch
 import calibrateregions
 from ultralytics import YOLO
-from ultralytics import YOLOv10
 import cv2
 
 weights = "weights\safety_shoe_3Jun_3.pt"
-source = "cropped_images\crop_0_1.jpg"
+source = "cropped_images\crop_frame1_obj0_1.jpg"
 
 # Load a model
 model = YOLO(weights)  # load an official model
@@ -17,7 +16,7 @@ model = YOLO(weights)  # load an official model
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model(source, imgsz=320, show=True)  # predict on an image
+results = model(source, imgsz=160, show=True, classes=[1])  # predict on an image
 
 for result in results:
     result.show()
