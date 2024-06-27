@@ -8,14 +8,14 @@ from ultralytics import YOLO
 import cv2
 
 weights_person = "weights/braniv4_100epoch.pt"
-source = "input_media\Hoistlift6.mp4"
+source = "input_media\humanDistance2.jpg"
 weights_boots = "weights\safety_shoe_3Jun_3.pt"
 
 # Load the YOLO model
 model = YOLO(weights_person)
 
 # Predict with the model
-results = model(source, imgsz=960, show=True, classes=[3])  # predict on an image
+results = model(source, imgsz=640, show=True, classes=[3])  # predict on an image
 
 # Load the original image using OpenCV
 original_image = cv2.imread(source)
@@ -30,7 +30,7 @@ for i, result in enumerate(results):
     for j, (bbox, cls) in enumerate(zip(result.boxes.xyxy, result.boxes.cls)):
         # Extract bounding box coordinates
         x1, y1, x2, y2 = map(int, bbox)  # Convert to integers
-        cropped_image = original_image[y1 + int((y2 - y1) * 0):y2, x1:x2]  # Crop the image
+        cropped_image = original_image[y1 + int((y2 - y1) * 0 - 5):y2 + 5, x1 - 5:x2 + 5]  # Crop the image
 
         # Save the cropped image
         crop_filename = f"{cropped_dir}/crop_{i}_{j}.jpg"
