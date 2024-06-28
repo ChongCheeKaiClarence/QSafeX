@@ -16,7 +16,7 @@ def run_inference(image_dir, output_dir):
         print(e.stderr.decode())
 
 # Open the video file
-video_path = 'input_media/Hoistlift29.mp4'
+video_path = 'input_media/Hoistlift32.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -50,33 +50,43 @@ while True:
     human_results = detector_human(frame, imgsz=640, classes=[3])  
     
     for human_result in human_results:
-        for bbox1 in human_result.boxes.xyxy:
+        list_of_images = []
+        for j, bbox1 in enumerate(human_result.boxes.xyxy):
 
             x1, y1, x2, y2 = map(int, bbox1)
+               
+            x1 = max(0, x1 - 5)
+            y1 = max(0, y1 - 5)
+            x2 = min(frame_width, x2 + 5)
+            y2 = min(frame_height, y2 + 5)
+                
+            list_of_images.append([x1, y1, x2, y2])
             
             # Crop the region of interest (human)
             roi = frame[y1 - 5:y2 + 5, x1 - 5:x2 + 5].copy()
 
                     # Save the cropped image
-            crop_filename = f"{cropped_input_dir}/sr.jpg"
+            crop_filename = f"{cropped_input_dir}/sr_{j}.jpg"
             cv2.imwrite(crop_filename, roi)
 
-            run_inference(cropped_input_dir, cropped_output_dir)
-            
+        run_inference(cropped_input_dir, cropped_output_dir)
+        
+        for k, (x1_image, y1_image, x2_image, y2_image) in enumerate(list_of_images):
+        
             # Run shoe detection on the ROI
-            shoe_results = detector_shoes('output_SR_images/sr.jpg', imgsz=320, classes=[1]) 
+            shoe_results = detector_shoes(f"{cropped_output_dir}/sr_{k}.jpg", imgsz=320, classes=[1]) 
             
             for shoe_result in shoe_results:
                 for bbox2 in shoe_result.boxes.xyxy:
                     x1_shoe, y1_shoe, x2_shoe, y2_shoe = map(int, bbox2)
                     
                     # Adjust shoe bounding box coordinates relative to the whole frame
-                    cv2.rectangle(frame, (x1 - 5 + int(x1_shoe / 4), y1 - 5 + int(y1_shoe / 4)), (x1 - 5 + int(x2_shoe / 4), y1 - 5 + int(y2_shoe / 4)), (0, 255, 0), 2)
-                    cv2.putText(frame, 'shoe', (x1 - 5 + int(x1_shoe / 4), y1 - 5 + int(y1_shoe / 4) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                    cv2.rectangle(frame, (x1_image - 5 + int(x1_shoe / 4), y1_image - 5 + int(y1_shoe / 4)), (x1_image - 5 + int(x2_shoe / 4), y1_image - 5 + int(y2_shoe / 4)), (0, 255, 0), 2)
+                    cv2.putText(frame, 'shoe', (x1_image - 5 + int(x1_shoe / 4), y1_image - 5 + int(y1_shoe / 4) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
             
             # # Draw bounding box and label for the human
-            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 255), 2)
-            cv2.putText(frame, 'human', (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
+            cv2.rectangle(frame, (x1_image, y1_image), (x2_image, y2_image), (0, 255, 255), 2)
+            cv2.putText(frame, 'human', (x1_image, y1_image - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
     
     # Write the annotated frame to the output video
     out.write(frame)
