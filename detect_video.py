@@ -8,7 +8,7 @@ detector_human = YOLO('weights/braniv4_100epoch.pt')
 detector_shoes = YOLO('weights\safety_shoe_3Jun_3.pt')
 
 # Open the video file
-video_path = 'input_media/Hoistlift29.mp4'
+video_path = 'input_media/Hoistlift6.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -37,9 +37,18 @@ while True:
     for human_result in human_results:
         for bbox1 in human_result.boxes.xyxy:
             x1, y1, x2, y2 = map(int, bbox1)
+
+            if (x1 - 5) < 0:
+                x1 = 0
+            if (y1 - 5) < 0:
+                y1 = 0
+            if (x2 + 5) > frame_width:
+                x2 = frame_width
+            if (y2 + 5) > frame_height:
+                y2 = frame_height
             
             # Crop the region of interest (human)
-            roi = frame[y1 - 5:y2 + 5, x1 - 5:x2 + 5].copy()
+            roi = frame[y1:y2, x1:x2].copy()
             
             # Run shoe detection on the ROI
             shoe_results = detector_shoes(roi, imgsz=320, classes=[1]) 
