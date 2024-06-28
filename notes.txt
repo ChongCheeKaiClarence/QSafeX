@@ -17,3 +17,4 @@ output_media\Hoistligt21_cls_160.avi -> 312.13123083114624
 output_media\Hoistlift21_320.avi -> 480.18553614616394
 output_media\Hoistlift21_640.avi -> 734.7356832027435
 output_media\Hoistlift29_320_offset_xyxy_.avi -> 4848.088279247284
+43630.73268842697
