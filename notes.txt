@@ -16,5 +16,7 @@ output_media\Hoistlift32_160.avi -> 919.3269641399384
 output_media\Hoistligt21_cls_160.avi -> 312.13123083114624
 output_media\Hoistlift21_320.avi -> 480.18553614616394
 output_media\Hoistlift21_640.avi -> 734.7356832027435
+
+Speed test on t4 gpu
 output_media\Hoistlift29_320_offset_xyxy_.avi -> 4848.088279247284
-output_media\Hoistlift29_320_offset_xyxy_SR.avi43630.73268842697
+output_media\Hoistlift29_320_offset_xyxy_SR.avi -> 43630.73268842697

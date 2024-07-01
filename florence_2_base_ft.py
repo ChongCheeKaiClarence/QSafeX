@@ -7,10 +7,11 @@ from transformers import AutoProcessor, AutoModelForCausalLM
 model = AutoModelForCausalLM.from_pretrained("microsoft/Florence-2-large-ft", trust_remote_code=True)
 processor = AutoProcessor.from_pretrained("microsoft/Florence-2-large-ft", trust_remote_code=True)
 
-url = "cropped_images\crop_0_0.jpg"
-image = Image.open(requests.get(url, stream=True).raw)
+# url = "cropped_images\crop_0_0.jpg"
+# image = Image.open(requests.get(url, stream=True).raw)
 
-def run_example(task_prompt, text_input=None):
+def run_example(task_prompt, input_image, text_input=None):
+    image = Image.open(input_image)
     if text_input is None:
         prompt = task_prompt
     else:
@@ -28,6 +29,6 @@ def run_example(task_prompt, text_input=None):
 
     print(parsed_answer)
 
-task_prompt = '<REGION_TO_CATEGORY>'
-results = run_example(task_prompt, text_input="shoes")
-print(results)
+# task_prompt = '<REGION_TO_CATEGORY>'
+# results = run_example(task_prompt, text_input="shoes")
+# print(results)
