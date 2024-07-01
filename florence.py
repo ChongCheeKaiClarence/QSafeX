@@ -8,7 +8,7 @@ from florence_2_base_ft import run_example
 detector = YOLO('weights/braniv4_100epoch.pt')
 
 # Open the video file
-video_path = 'input_media\HoistLift21.mp4'
+video_path = '/content/drive/MyDrive/QSafeX/Brani_Base_Media/Videos/Hoist_Lift/Hoistlift2.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -17,8 +17,11 @@ frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
+cropped_input_dir = "input_florence_images"
+os.makedirs(cropped_input_dir, exist_ok=True)
+
 # Output video writer
-output_dir = 'output_media'
+output_dir = '/content/drive/MyDrive/QSafeX/Output_Media'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 output_video_path = os.path.join(output_dir, 'annotated_video.avi')
@@ -39,7 +42,9 @@ while True:
         for bbox in result.boxes.xyxy:
             x1, y1, x2, y2 = map(int, bbox)
             roi = frame[y1:y2, x1:x2]
-            class_name = run_example('<REGION_TO_CATEGORY>', roi, text_input="shoes")
+            crop_filename = f"{cropped_input_dir}/sr.jpg"
+            cv2.imwrite(crop_filename, roi)
+            class_name = run_example('<REGION_TO_CATEGORY>', crop_filename , text_input="shoes")
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(frame, class_name, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
     
