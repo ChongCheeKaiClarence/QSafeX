@@ -7,7 +7,7 @@ from ultralytics import YOLO
 model = YOLO("weights\ppev1.pt")
 
 # Open the video file
-video_path = "input_media/Hoistlift29.mp4"
+video_path = "input_media/04072024_15_13_11.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -31,16 +31,17 @@ while cap.isOpened():
 
     if success:
         # Run YOLOv8 inference on the frame
-        results = model(frame)
+        results = model(frame, imgsz=1280)
 
         # Visualize the results on the frame
         annotated_frame = results[0].plot()
 
         # Display the annotated frame
-        cv2.imshow("YOLOv8 Inference", annotated_frame)
-
-        # Break the loop if 'q' is pressed
-        if cv2.waitKey(1) & 0xFF == ord("q"):
+            # Display the frame (optional)
+        cv2.namedWindow("Annotated Frame", cv2.WINDOW_NORMAL)
+        imS = cv2.resize(annotated_frame, (960, 540))  
+        cv2.imshow('Annotated Frame', imS)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     else:
         # Break the loop if the end of the video is reached

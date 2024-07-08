@@ -4,11 +4,11 @@ import os
 import time 
 
 # Load your models
-detector_human = YOLO('weights/braniv4_100epoch.pt')
-detector_shoes = YOLO('weights\safety_shoe_3Jun_3.pt')
+detector_human = YOLO('weights/ppev1.pt')
+detector_shoes = YOLO('weights/safety_shoe_3Jun_3.pt')
 
 # Open the video file
-video_path = 'input_media/Hoistlift6.mp4'
+video_path = 'input_media\human4_040724_1513.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -32,20 +32,30 @@ while True:
         break
     
     # Run object detection on the frame for humans
-    human_results = detector_human(frame, imgsz=640, classes=[3])  
+    human_results = detector_human(frame, imgsz=1280)  
     
     for human_result in human_results:
         for bbox1 in human_result.boxes.xyxy:
             x1, y1, x2, y2 = map(int, bbox1)
 
-            if (x1 - 5) < 0:
+            offset = 10
+
+            if (x1 - offset) < 0:
                 x1 = 0
-            if (y1 - 5) < 0:
+            else:
+                x1 = x1 - offset
+            if (y1 - offset) < 0:
                 y1 = 0
-            if (x2 + 5) > frame_width:
+            else:
+                y1 = y1 - offset
+            if (x2 + offset) > frame_width:
                 x2 = frame_width
-            if (y2 + 5) > frame_height:
+            else:
+                x2 = x2 + offset
+            if (y2 + offset) > frame_height:
                 y2 = frame_height
+            else:
+                y2 = y2 + offset
             
             # Crop the region of interest (human)
             roi = frame[y1:y2, x1:x2].copy()
@@ -69,7 +79,9 @@ while True:
     out.write(frame)
     
     # Display the frame (optional)
-    cv2.imshow('Annotated Frame', frame)
+    cv2.namedWindow("Annotated Frame", cv2.WINDOW_NORMAL)
+    imS = cv2.resize(frame, (960, 540))  
+    cv2.imshow('Annotated Frame', imS)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
