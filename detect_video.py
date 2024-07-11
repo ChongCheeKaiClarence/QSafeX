@@ -8,7 +8,7 @@ detector_human = YOLO('weights/ppev1.pt')
 detector_shoes = YOLO('weights/safety_shoe_3Jun_3.pt')
 
 # Open the video file
-video_path = 'input_media\human3_040724_1443.mp4'
+video_path = 'input_media\Human_090724_1321.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -61,7 +61,7 @@ while True:
             roi = frame[y1:y2, x1:x2].copy()
             
             # Run shoe detection on the ROI
-            shoe_results = detector_shoes(roi, imgsz=320, classes=[1]) 
+            shoe_results = detector_shoes(roi, imgsz=320, classes=[1], conf=0.1) 
             
             for shoe_result in shoe_results:
                 for bbox2 in shoe_result.boxes.xyxy:
