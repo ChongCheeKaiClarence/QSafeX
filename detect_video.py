@@ -8,7 +8,7 @@ detector_human = YOLO('weights/ppev1.pt')
 detector_shoes = YOLO('weights/safety_shoe_3Jun_3.pt')
 
 # Open the video file
-video_path = 'input_media\human4_040724_1513.mp4'
+video_path = 'input_media\human3_040724_1443.mp4'
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -32,7 +32,7 @@ while True:
         break
     
     # Run object detection on the frame for humans
-    human_results = detector_human(frame, imgsz=1280)  
+    human_results = detector_human(frame, imgsz=1280, classes=[1])  
     
     for human_result in human_results:
         for bbox1 in human_result.boxes.xyxy:
