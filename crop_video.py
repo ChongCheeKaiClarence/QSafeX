@@ -44,7 +44,7 @@ while cap.isOpened():
             x1, y1, x2, y2 = map(int, bbox)  # Convert to integers
 
             # Crop the image frame
-            cropped_image = frame[y1:y2, x1:x2]
+            cropped_image = frame[y1 - 10:y2 + 10, x1 - 10:x2 + 10]
 
             # Save the cropped image
             crop_filename = f"{cropped_dir}/crop_frame{frame_num}_obj{i}_{j}.jpg"

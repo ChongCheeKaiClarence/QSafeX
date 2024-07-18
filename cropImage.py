@@ -7,9 +7,8 @@ import calibrateregions
 from ultralytics import YOLO
 import cv2
 
-weights_person = "weights/braniv4_100epoch.pt"
+weights_person = "weights\HumanV3Dataset_18July.pt"
 source = "input_media\humanDistance2.jpg"
-weights_boots = "weights\safety_shoe_3Jun_3.pt"
 
 # Load the YOLO model
 model = YOLO(weights_person)
