@@ -4,7 +4,7 @@ import os
 import time 
 
 # Load your models
-detector = YOLO('weights/humanv3.pt')
+detector = YOLO('weights/HumanV3Dataset_18July.pt')
 classifier = YOLO('weights/footwear_cls_18June_2.pt')
 
 # Open the video file
@@ -32,7 +32,7 @@ while True:
         break
     
     # Run object detection on the frame
-    detection_results = detector(frame, imgsz=1280)
+    detection_results = detector(frame, imgsz=640)
     
     # Iterate over detections
     for result in detection_results:

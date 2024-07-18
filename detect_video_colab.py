@@ -4,7 +4,7 @@ import os
 import time 
 
 # Load your models
-detector_human = YOLO('weights/humanv3.pt')
+detector_human = YOLO('weights/HumanV3Dataset_18July.pt')
 detector_shoes = YOLO('weights/safety_shoe_3Jun_3.pt')
 
 # Open the video file
@@ -32,7 +32,7 @@ while True:
         break
     
     # Run object detection on the frame for humans
-    human_results = detector_human(frame, imgsz=1280)  
+    human_results = detector_human(frame, imgsz=640)  
     
     for human_result in human_results:
         for bbox1 in human_result.boxes.xyxy:
