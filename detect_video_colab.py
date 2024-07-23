@@ -1,4 +1,5 @@
 from ultralytics import YOLO
+from ultralytics import RTDETR
 import cv2
 import os
 import time 
