@@ -7,16 +7,17 @@ import calibrateregions
 from ultralytics import YOLO
 import cv2
 
-weights = "weights\safety_shoe_3Jun_3.pt"
-source = "cropped_images\crop_0_2.jpg"
+weights1 = "weights\safety_shoe_3Jun_3.pt"
+weights2 = "weights/shoe_2_23July.pt"
+source = "input_media\photo_2024-07-24_11-24-22.jpg"
 
 # Load a model
-model = YOLO(weights)  # load an official model
+model = YOLO(weights2)  # load an official model
 # model("input_media/black_screen.png")
 # model = YOLO("weights\mnist_cls.pt")  # load a custom model
 
 # Predict with the model
-results = model(source, imgsz=320, show=True)  # predict on an image
+results = model(source, imgsz=320, classes=[2], conf=0.1, show=True, save=True)  # predict on an image
 
 for result in results:
     result.show()
