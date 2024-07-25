@@ -7,6 +7,8 @@ weights/ -> https://github.com/ongaunjie1/YOLOv8-streamlit-app/blob/master/noteb
 
 hoistImage -> too far for ppe detection, only the orange vest can detect (reference for distance)
 
+tracking reference -> https://supervision.roboflow.com/latest/how_to/track_objects/#tracking
+
 
 Speed test on desktop
 output_media\Hoistlift32_cls_160.avi -> 630.8101532459259

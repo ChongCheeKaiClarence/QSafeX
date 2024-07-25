@@ -9,7 +9,7 @@ import cv2
 
 weights1 = "weights\safety_shoe_3Jun_3.pt"
 weights2 = "weights/shoe_2_23July.pt"
-source = "input_media\photo_2024-07-24_11-24-22.jpg"
+source = "input_media\photo_2024-07-24_15-27-58.jpg"
 
 # Load a model
 model = YOLO(weights2)  # load an official model
