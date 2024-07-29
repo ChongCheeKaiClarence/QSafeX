@@ -1,9 +1,7 @@
-safety_shoe_31May.pt -> https://universe.roboflow.com/ppe-detection-ik50q/alert-for-safety-violation-xzjtj
 weights/safety_shoe_3Jun_2.pt -> https://universe.roboflow.com/huiyao-hu-sj18e/construction-ppe-detection/dataset/1
 weights/shoe_cls_3Jun.pt -> https://universe.roboflow.com/newstep30/shoe-classication-kaggle
 weights\safety_shoe_3Jun_3.pt -> https://universe.roboflow.com/ppe-detection-ik50q/alert-for-safety-violation-xzjtj/dataset/9#  -  mAP50  mAP50-95    0.903      0.622
 weights\shoe_seg_10June.pt -> https://universe.roboflow.com/minor-project-i54la/shoe-segmentation-0kxvd/dataset/1#
-weights/ -> https://github.com/ongaunjie1/YOLOv8-streamlit-app/blob/master/notebooks/PPE_Detection.ipynb
 
 hoistImage -> too far for ppe detection, only the orange vest can detect (reference for distance)
 
