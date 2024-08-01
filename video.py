@@ -4,10 +4,10 @@ import os
 from ultralytics import YOLO
 
 # Load the YOLOv8 model
-model = YOLO("weights/HumanV3Dataset_18July.pt")
+model = YOLO("weights/HumanV3Dataset_1Aug.pt")
 
 # Open the video file
-video_path = "/content/drive/MyDrive/QSafeX/Brani_Base_Media/Videos/New_Videos/Clipped_videos/Human_100724_1120.mp4"
+video_path = "input_media\human_290724_1244.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Get video information
@@ -18,7 +18,7 @@ total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
 
 # Output video writer
-output_dir = '/content/drive/MyDrive/QSafeX/Output_Media'
+output_dir = 'output_Media'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 output_video_path = os.path.join(output_dir, 'annotated_detect_video.avi')
@@ -31,7 +31,7 @@ while cap.isOpened():
 
     if success:
         # Run YOLOv8 inference on the frame
-        results = model(frame, imgsz=1280)
+        results = model(frame, imgsz=640, classes=[1])
 
         # Visualize the results on the frame
         annotated_frame = results[0].plot()
